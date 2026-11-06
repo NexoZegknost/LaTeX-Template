@@ -1,0 +1,49 @@
+% ==============================================================================
+% COLORS: BẢNG MÀU DÙNG CHUNG
+% ------------------------------------------------------------------------------
+%  Mỗi màu có 3 sắc độ:   <tên>  (chuẩn)   <tên>dam (đậm)   <tên>nhat (nền nhạt)
+%  Ví dụ: \textcolor{xanhla}{...}, \colorbox{camnhat}{...}, colback=tim nhat
+% ==============================================================================
+
+% ---------- Màu thương hiệu Bách Khoa ----------
+\definecolor{bkxanh}{HTML}{0B3D91}       % xanh navy chủ đạo (tiêu đề, khung)
+\definecolor{bkxanhsang}{HTML}{1E88E5}   % xanh logo (điểm nhấn, liên kết)
+\definecolor{bkxanhnen}{HTML}{EAF2FC}    % nền xanh rất nhạt (bảng sọc, khung)
+\definecolor{bkvien}{HTML}{0000B4}       % xanh khung bìa
+\definecolor{bkxam}{HTML}{5F6B7A}        % chữ phụ
+
+% ---------- Màu cơ bản (tên không dấu) ----------
+\definecolor{xanhduong}{HTML}{1565C0}
+\definecolor{xanhla}{HTML}{2E7D32}
+\definecolor{ngoc}{HTML}{00838F}          % xanh ngọc / teal
+\definecolor{do}{HTML}{C62828}
+\definecolor{cam}{HTML}{E65100}
+\definecolor{vang}{HTML}{F9A825}
+\definecolor{tim}{HTML}{6A1B9A}
+\definecolor{hong}{HTML}{AD1457}
+\definecolor{nau}{HTML}{6D4C41}
+\definecolor{xam}{HTML}{616161}
+
+% ---------- Tự sinh sắc độ đậm / nhạt ----------
+\newcommand{\TaoSacDo}[1]{%
+  \colorlet{#1dam}{#1!75!black}%
+  \colorlet{#1nhat}{#1!9!white}}
+\TaoSacDo{xanhduong}\TaoSacDo{xanhla}\TaoSacDo{ngoc}\TaoSacDo{do}
+\TaoSacDo{cam}\TaoSacDo{vang}\TaoSacDo{tim}\TaoSacDo{hong}
+\TaoSacDo{nau}\TaoSacDo{xam}\TaoSacDo{bkxanh}
+\colorlet{vangnhat}{vang!22!white}        % nền highlight vàng rõ hơn
+
+% ---------- Màu cho mã nguồn ----------
+\definecolor{manen}{HTML}{F7F9FC}
+\definecolor{matukhoa}{HTML}{1D4ED8}
+\definecolor{machuthich}{HTML}{15803D}
+\definecolor{machuoi}{HTML}{9333EA}
+\definecolor{maso}{HTML}{94A3B8}
+
+% ---------- Lệnh tô chữ nhanh ----------
+\newcommand{\chuxanh}[1]{\textcolor{xanhduong}{#1}}
+\newcommand{\chula}[1]{\textcolor{xanhla}{#1}}
+\newcommand{\chudo}[1]{\textcolor{do}{#1}}
+\newcommand{\chucam}[1]{\textcolor{cam}{#1}}
+\newcommand{\chutim}[1]{\textcolor{tim}{#1}}
+\newcommand{\chuxam}[1]{\textcolor{xam}{#1}}

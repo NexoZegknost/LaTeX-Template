@@ -1,0 +1,72 @@
+% ==============================================================================
+% CHƯƠNG 2: CƠ SỞ LÝ THUYẾT
+% ==============================================================================
+\chapter{Cơ sở lý thuyết}
+\label{chap:co-so}
+
+\section{Các khái niệm nền tảng}
+\label{sec:khai-niem}
+
+\begin{dinhnghia}[Mô hình dựa trên tác vụ]
+  \label{dn:tac-vu}
+  Một công việc được xem là tập hợp các \textit{tác vụ} riêng biệt; công nghệ có thể
+  thay thế một phần tác vụ mà không thay thế toàn bộ công việc.
+\end{dinhnghia}
+
+Theo Định nghĩa~\ref{dn:tac-vu}, tác động của công nghệ được tách thành hai hiệu ứng:
+\begin{itemize}
+  \item \textbf{Hiệu ứng thay thế:} công nghệ làm tác vụ rẻ hơn, giảm nhu cầu lao động
+        ở tác vụ đó.
+  \item \textbf{Hiệu ứng năng suất:} chi phí giảm giúp mở rộng sản xuất, tăng nhu cầu
+        lao động ở các tác vụ còn lại.
+\end{itemize}
+
+\section{Mô hình toán học}
+\label{sec:mo-hinh}
+
+Tác động ròng lên nhu cầu lao động có thể viết gọn như \PT{eq:tac-dong}:
+\begin{khungcongthuc}[Tác động ròng]
+  \begin{equation}
+    \label{eq:tac-dong}
+    \Delta L \;=\; \underbrace{-\,\alpha \, \Delta A}_{\text{thay thế}}
+          \;+\; \underbrace{\beta \, \Delta A}_{\text{năng suất}},
+    \qquad \alpha, \beta > 0
+  \end{equation}
+\end{khungcongthuc}
+trong đó $\Delta A$ là mức thay đổi tiếp xúc với công nghệ. Kết quả cần nhớ có thể
+đóng khung ngay trong dòng công thức:
+\begin{equation}
+  \label{eq:dieu-kien}
+  \NoiBat{\Delta L < 0 \iff \alpha > \beta}
+\end{equation}
+
+\begin{dinhly}[Điều kiện cân bằng]
+  Nếu $\alpha = \beta$ thì tác động ròng bằng $0$ dù từng hiệu ứng thành phần khác $0$.
+\end{dinhly}
+
+\begin{vidu}[Áp dụng công thức]
+  Cho $\alpha = 0{,}6$, $\beta = 0{,}4$ và $\Delta A = 10$. Tính $\Delta L$.
+\end{vidu}
+\begin{loigiai}
+  Thay số vào \PT{eq:tac-dong}:
+  $\Delta L = -0{,}6 \cdot 10 + 0{,}4 \cdot 10 = -2$.
+  Vì $\alpha > \beta$ nên nhu cầu lao động giảm, đúng với điều kiện \eqref{eq:dieu-kien}.
+\end{loigiai}
+
+\section{Các nghiên cứu liên quan}
+\label{sec:lien-quan}
+
+Tóm lược các công trình chính \cite{acemoglu2022, brynjolfsson2025, acemoglu2020}, chỉ ra
+điểm giống/khác với hướng tiếp cận của báo cáo.
+
+\begin{trichdan}{Acemoglu và cộng sự (2022)}
+  AI technologies are still in their infancy and have spread to only a limited part of
+  the US economy.
+\end{trichdan}
+
+\begin{ychinh}
+  \begin{dssao}
+    \item Ý chính thứ nhất của chương.
+    \item Ý chính thứ hai, dẫn dắt sang chương sau.
+  \end{dssao}
+\end{ychinh}

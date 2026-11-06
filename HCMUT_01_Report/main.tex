@@ -1,0 +1,52 @@
+% !TEX program = xelatex
+% ==============================================================================
+%  MẪU BÁO CÁO HCMUT  (documentclass: report)
+%  Biên dịch khuyên dùng: XeLaTeX  (latexmk / compile.bat / make)
+% ==============================================================================
+\documentclass[a4paper,12pt,oneside]{report}
+
+% ---------- 1. CHỌN CHẾ ĐỘ BÁO CÁO (chỉ cần đổi 1 dòng) ----------------------
+\input{config/mode}
+%\BaoCaoNhom          % Báo cáo NHÓM  (nhiều thành viên)
+\BaoCaoCaNhan      % Báo cáo CÁ NHÂN (1 người: lấy thành viên đầu tiên)
+
+% ---------- 2. THÔNG TIN & CẤU HÌNH ------------------------------------------
+\input{config/metadata}   % Trường, môn học, đề tài, GVHD, thành viên
+\input{config/preamble}   % Gói lệnh, phông Latin Modern + tiếng Việt, lề trang
+\input{config/colors}     % Bảng màu dùng chung
+\input{config/style}      % Tiêu đề chương/mục, header/footer, mục lục, caption
+\input{config/commands}   % Hộp màu, bảng nhanh, công thức, hình, nhấn mạnh...
+
+\begin{document}
+
+% ========== TRANG BÌA (không đánh số) ==========
+\input{frontmatter/trang-bia}
+
+% ========== PHẦN ĐẦU: đánh số i, ii, iii ... ==========
+\BatDauPhanDau
+\input{frontmatter/loi-cam-doan}
+\input{frontmatter/loi-cam-on}
+\input{frontmatter/tom-tat}
+\ifnhom \input{frontmatter/phan-cong} \fi   % chỉ xuất hiện ở bản nhóm
+
+\MucLuc                 % Mục lục
+\DanhMucHinh            % Danh mục hình ảnh  (xóa dòng nếu không có hình)
+\DanhMucBang            % Danh mục bảng biểu (xóa dòng nếu không có bảng)
+\input{frontmatter/viet-tat}
+
+% ========== NỘI DUNG CHÍNH: đánh số 1, 2, 3 ... ==========
+\BatDauNoiDung
+\input{chapters/01-mo-dau}
+\input{chapters/02-co-so-ly-thuyet}
+\input{chapters/03-phuong-phap}
+\input{chapters/04-ket-qua}
+\input{chapters/05-ket-luan}
+
+\TaiLieuThamKhao{references/references}
+
+% ========== PHỤ LỤC: tiếp tục đánh số La Mã ==========
+\BatDauPhuLuc
+\input{appendix/A-du-lieu-bo-sung}
+\input{appendix/B-cam-nang-thanh-phan}
+
+\end{document}

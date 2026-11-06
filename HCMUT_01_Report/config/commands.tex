@@ -1,0 +1,317 @@
+% ==============================================================================
+% COMMANDS: THÀNH PHẦN NHANH
+%  (Xem Phụ lục B của bản PDF để có ví dụ + mã nguồn của từng thành phần)
+% ==============================================================================
+\makeatletter
+
+% ==============================================================================
+% 1. NHẤN MẠNH CHỮ TRONG ĐOẠN
+% ==============================================================================
+\newcommand{\nhanmanh}[1]{\textbf{\textcolor{bkxanh}{#1}}}         % ý chính
+\newcommand{\quantrong}[1]{\textbf{\textcolor{do}{#1}}}            % rất quan trọng
+\newcommand{\danhdau}[1]{\colorbox{vangnhat}{\strut #1}}           % bút dạ quang (cụm ngắn)
+% Thuật ngữ: \thuatngu{Trí tuệ nhân tạo}[Artificial Intelligence]
+\NewDocumentCommand{\thuatngu}{m o}{%
+  \textbf{\textcolor{bkxanhdam}{#1}}\IfValueT{#2}{ (\textit{#2})}}
+% Nhãn nhỏ: \nhan{Mới}  \nhan[do]{Quan trọng}
+\NewDocumentCommand{\nhan}{O{bkxanhsang} m}{%
+  \tcbox[on line, colback=#1, colframe=#1, colupper=white, boxrule=0pt,
+         arc=2pt, boxsep=0pt, left=3pt, right=3pt, top=1.5pt, bottom=1.5pt,
+         fontupper=\footnotesize\bfseries]{#2}}
+% Ghi chú "cần bổ sung" để nhắc việc khi viết nháp
+\newcommand{\canbosung}[1]{\nhan[do]{CẦN BỔ SUNG}~\textcolor{do}{\textit{#1}}}
+% Biểu tượng tròn: \bieutuong{xanhla}{\ding{51}}
+\newcommand{\bieutuong}[2]{%
+  \tikz[baseline=-0.6ex]\node[circle, fill=#1, text=white, inner sep=0pt,
+    minimum size=1.15em, font=\footnotesize\bfseries]{#2};}
+\newcommand{\dung}{\textcolor{xanhla}{\ding{51}}}
+\newcommand{\sai}{\textcolor{do}{\ding{55}}}
+
+% Danh sách có dấu tick / dấu chéo / ngôi sao
+\newlist{dsdung}{itemize}{1}\setlist[dsdung]{label=\dung, leftmargin=1.8em}
+\newlist{dssai}{itemize}{1}\setlist[dssai]{label=\sai, leftmargin=1.8em}
+\newlist{dssao}{itemize}{1}\setlist[dssao]{label=\textcolor{cam}{\ding{72}}, leftmargin=1.8em}
+
+% ==============================================================================
+% 2. HỘP / KHUNG CHỮ (tcolorbox)
+% ==============================================================================
+% Kiểu chung: vạch màu bên trái + dải tiêu đề nhạt
+\tcbset{
+  hopvach/.style={enhanced, breakable, colback=#1nhat, colframe=#1,
+    boxrule=0pt, leftrule=3.5pt, arc=0pt, outer arc=0pt,
+    left=9pt, right=9pt, top=5pt, bottom=6pt, before skip=8pt, after skip=8pt,
+    colbacktitle=#1!16!white, coltitle=#1dam, fonttitle=\bfseries,
+    titlerule=0pt, toptitle=2pt, bottomtitle=2pt},
+  hopdac/.style={enhanced, breakable, colback=white, colframe=#1,
+    colbacktitle=#1, coltitle=white, fonttitle=\bfseries, boxrule=0.8pt,
+    arc=1.5mm, left=9pt, right=9pt, top=6pt, bottom=6pt,
+    before skip=8pt, after skip=8pt},
+}
+% 2.1 Hộp thông báo  — \begin{ghichu}[Tiêu đề tùy chọn] ... \end{ghichu}
+\newtcolorbox{ghichu}[1][Ghi chú]{hopvach=xanhduong,
+  title={\bieutuong{xanhduong}{i}\hspace{5pt}#1}}
+\newtcolorbox{luuy}[1][Lưu ý]{hopvach=cam,
+  title={\bieutuong{cam}{!}\hspace{5pt}#1}}
+\newtcolorbox{canhbao}[1][Cảnh báo]{hopvach=do,
+  title={\bieutuong{do}{\ding{55}}\hspace{5pt}#1}}
+\newtcolorbox{goiy}[1][Gợi ý]{hopvach=xanhla,
+  title={\bieutuong{xanhla}{\ding{51}}\hspace{5pt}#1}}
+
+% 2.2 Hộp kết quả / kết luận nổi bật
+\newtcolorbox{ketqua}[1][Kết quả chính]{hopdac=xanhla, colback=xanhlanhat, title={#1}}
+
+% 2.3 Hộp đánh số theo chương: Định nghĩa 2.1, Định lý 2.1, Ví dụ 2.1
+%     \begin{dinhnghia}[Tên tùy chọn] ... \label{dn:x} \end{dinhnghia}
+\newtcolorbox[auto counter, number within=chapter]{dinhnghia}[1][]{hopdac=bkxanh,
+  colback=bkxanhnen,
+  title={Định nghĩa~\thetcbcounter\ifstrempty{#1}{}{:~#1}}}
+\newtcolorbox[auto counter, number within=chapter]{dinhly}[1][]{hopdac=tim,
+  colback=timnhat,
+  title={Định lý~\thetcbcounter\ifstrempty{#1}{}{:~#1}}}
+\newtcolorbox[auto counter, number within=chapter]{vidu}[1][]{hopvach=ngoc,
+  title={Ví dụ~\thetcbcounter\ifstrempty{#1}{}{:~#1}}}
+
+% 2.4 Khung chữ tự chọn màu: \begin{khungchu}[màu]{Tiêu đề}  hoặc  [màu] không tiêu đề
+\NewTColorBox{khungchu}{O{bkxanh} o}{hopdac=#1, colback=#1nhat,
+  IfValueT={#2}{title={#2}}}
+
+% 2.5 Khung viền nét đứt (đề bài, yêu cầu, trích đoạn)
+\NewTColorBox{khungnetdut}{O{bkxanh}}{enhanced, breakable, colback=white,
+  frame hidden, borderline={0.8pt}{0pt}{#1, dashed}, arc=1.5mm,
+  left=9pt, right=9pt, top=6pt, bottom=6pt}
+
+% 2.5b Lời giải (khung trắng xám, chữ xanh dương):  \begin{loigiai}[Tiêu đề] ... \end{loigiai}
+\newtcolorbox{loigiai}[1][Lời giải]{enhanced, breakable,
+  colback=xam!4, colframe=xam!35, boxrule=0.6pt, arc=1.5mm,
+  colupper=xanhduongdam, left=10pt, right=10pt, top=6pt, bottom=6pt,
+  before skip=8pt, after skip=8pt,
+  colbacktitle=xam!12, coltitle=xanhduongdam, fonttitle=\bfseries, titlerule=0.4pt,
+  title={\ding{46}\hspace{5pt}#1},
+  after upper={\par\nobreak\hfill\textcolor{xam!70}{$\blacksquare$}}}
+
+% 2.6 Trích dẫn: \begin{trichdan}{Tác giả, năm} ... \end{trichdan}
+\newtcolorbox{trichdan}[1]{enhanced, breakable, colback=xamnhat, frame hidden,
+  boxrule=0pt, arc=0pt, left=26pt, right=12pt, top=8pt, bottom=8pt,
+  fontupper=\itshape,
+  overlay={\node[anchor=north west, text=bkxanhsang!60, font=\fontsize{40}{40}\selectfont]
+           at ([xshift=2pt, yshift=6pt]frame.north west) {``};
+           \draw[bkxanhsang, line width=2.5pt] (frame.north west) -- (frame.south west);},
+  after upper={\par\smallskip\hfill\normalfont\small --- #1}}
+
+% 2.7 Tóm tắt / ý chính của chương
+\newtcolorbox{ychinh}[1][Ý chính của chương]{hopdac=bkxanh, colback=bkxanhnen,
+  title={\ding{72}\hspace{5pt}#1}}
+
+% 2.8 So sánh hai cột: \SoSanh[màu1][màu2]{Tiêu đề 1}{Nội dung 1}{Tiêu đề 2}{Nội dung 2}
+\NewDocumentCommand{\SoSanh}{O{xanhla} O{do} m +m m +m}{%
+  \begin{tcbraster}[raster columns=2, raster equal height, raster column skip=8pt,
+                    raster before skip=8pt, raster after skip=8pt]
+    \begin{tcolorbox}[hopdac=#1, unbreakable, colback=#1nhat, title={#3}]#4\end{tcolorbox}%
+    \begin{tcolorbox}[hopdac=#2, unbreakable, colback=#2nhat, title={#5}]#6\end{tcolorbox}%
+  \end{tcbraster}}
+
+% 2.9 Ô chỉ số (số liệu nổi bật): \begin{hangchiso}[3] \ChiSo{16\%}{Mô tả} ... \end{hangchiso}
+\newenvironment{hangchiso}[1][3]
+  {\begin{tcbraster}[raster columns=#1, raster equal height, raster column skip=8pt,
+                     raster before skip=8pt, raster after skip=8pt]}
+  {\end{tcbraster}}
+\NewDocumentCommand{\ChiSo}{O{bkxanh} m m}{%
+  \begin{tcolorbox}[enhanced, colback=#1nhat, colframe=#1, boxrule=0pt,
+      toprule=3pt, arc=1mm, halign=center, valign=center, top=6pt, bottom=6pt]
+    {\fontsize{22}{26}\selectfont\bfseries\color{#1}#2}\par\smallskip
+    {\small #3}
+  \end{tcolorbox}}
+
+% ==============================================================================
+% 3. CÔNG THỨC
+% ==============================================================================
+% 3.1 Khung công thức có tiêu đề: \begin{khungcongthuc}[Tiêu đề] \begin{equation}...\end{equation} \end{khungcongthuc}
+\NewTColorBox{khungcongthuc}{o}{enhanced, colback=vangnhat!60!white,
+  colframe=cam, boxrule=0.6pt, arc=1.5mm, left=6pt, right=6pt, top=2pt, bottom=4pt,
+  before skip=8pt, after skip=8pt,
+  IfValueT={#1}{title={#1}, colbacktitle=cam, coltitle=white, fonttitle=\bfseries\small}}
+% 3.2 Đóng khung một công thức ngay trong equation:  \begin{equation} \NoiBat{E=mc^2} \end{equation}
+\tcbset{highlight math style={enhanced, colback=vangnhat, colframe=cam,
+  boxrule=0.6pt, arc=1mm, left=4pt, right=4pt, top=3pt, bottom=3pt}}
+\newcommand{\NoiBat}[1]{\tcbhighmath{#1}}
+% 3.3 Ký hiệu thường dùng
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\dif}{\mathop{}\!\mathrm{d}}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+
+% ==============================================================================
+% 4. BẢNG BIỂU
+% ==============================================================================
+% Kiểu cột: L/C/R{rộng} canh trái/giữa/phải;  Y = tabularx giãn, canh trái;  Z = giãn, canh giữa
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcolumntype{Z}{>{\centering\arraybackslash}X}
+% Hàng tiêu đề: \hangtieude \thead{Cột 1} & \thead{Cột 2} \\
+\renewcommand{\theadfont}{\bfseries\color{white}}
+\renewcommand{\theadalign}{cc}
+\newcommand{\hangtieude}{\rowcolor{bkxanh}}
+% \thead dựng một bảng con bên trong ô; khi bảng ngoài dùng \rowcolors (bangsoc,
+% danh mục...) bảng con bị tô màu sọc và làm lệch thứ tự sọc -> tạm tắt rồi khôi phục.
+\let\thead@goc\thead
+\renewcommand{\thead}{\@ifnextchar[\thead@moi{\thead@moi[]}}
+\def\thead@moi[#1]#2{%
+  \let\thead@rc\if@rowcolors \edef\thead@rn{\the\rownum}%
+  \global\@rowcolorsfalse
+  \ifx\relax#1\relax\thead@goc{#2}\else\thead@goc[#1]{#2}\fi
+  \global\rownum=\thead@rn\relax
+  \ifx\thead@rc\iftrue\global\@rowcolorstrue\fi}
+% Ô nổi bật trong bảng
+\newcommand{\otot}{\cellcolor{xanhlanhat}}
+\newcommand{\oxau}{\cellcolor{donhat}}
+\newcommand{\onoibat}{\cellcolor{vangnhat}}
+% Bảng nhanh:  \begin{bangbieu}{Chú thích}{tab:nhan}{C{1cm} Y Y} ... \end{bangbieu}
+\newenvironment{bangbieu}[3]
+  {\table[H]\centering\caption{#1}\label{#2}%
+   \tabularx{\linewidth}{#3}\toprule}
+  {\bottomrule\endtabularx\endtable}
+% Bảng sọc (hàng chẵn/lẻ xen màu)
+\newenvironment{bangsoc}[3]
+  {\table[H]\centering\caption{#1}\label{#2}%
+   \rowcolors{2}{white}{bkxanhnen}\tabularx{\linewidth}{#3}\toprule}
+  {\bottomrule\endtabularx\endtable}
+% Ghi chú/nguồn dưới bảng: \nguonbang{Tổng hợp từ [1]}
+\newcommand{\nguonbang}[1]{\par\vspace{-4pt}\noindent{\footnotesize\textit{Nguồn:} #1}\par}
+
+% ==============================================================================
+% 5. HÌNH ẢNH
+% ==============================================================================
+% Khung ảnh: viền xám mảnh, đệm trắng, bo góc
+\tcbset{khunganh/.style={enhanced, colback=white, colframe=xam!35, boxrule=0.6pt,
+  arc=1.5mm, boxsep=0pt, left=4pt, right=4pt, top=4pt, bottom=4pt, halign=center,
+  center, before skip=2pt, after skip=2pt}}
+% Biểu tượng "bức ảnh"
+\newcommand{\@iconanh}{%
+  \begin{tikzpicture}[scale=0.5]
+    \draw[bkxanhsang!70, line width=1.2pt, rounded corners=2pt] (0,0) rectangle (2.6,1.9);
+    \fill[bkxanhsang!45] (0.25,0.25) -- (1.0,1.15) -- (1.45,0.65) -- (1.8,1.0) -- (2.35,0.25) -- cycle;
+    \fill[vang] (1.9,1.45) circle (0.2);
+  \end{tikzpicture}}
+% Ô chờ ảnh (chưa có tệp) -> tự thay bằng ảnh thật khi tệp tồn tại
+\newcommand{\@ochoanh}[1]{%
+  \begin{tcolorbox}[enhanced, height=4.4cm, valign=center, halign=center, colback=bkxanhnen,
+      frame hidden, borderline={0.7pt}{0pt}{bkxanhsang!70, dash pattern=on 4pt off 2.5pt},
+      arc=1mm, boxsep=0pt, left=0pt, right=0pt, top=0pt, bottom=0pt]
+    \@iconanh\par\smallskip
+    {\small\bfseries\color{bkxanh}KHUNG CHỜ HÌNH ẢNH}\par
+    {\footnotesize\color{bkxam}\texttt{figures/\detokenize{#1}}}
+  \end{tcolorbox}}
+\newcommand{\@timanh}[2]{% #1 độ rộng, #2 tệp
+  \IfFileExists{figures/#2}{\includegraphics[width=#1]{#2}}%
+   {\IfFileExists{figures/#2.png}{\includegraphics[width=#1]{#2}}%
+    {\IfFileExists{figures/#2.jpg}{\includegraphics[width=#1]{#2}}%
+     {\IfFileExists{figures/#2.pdf}{\includegraphics[width=#1]{#2}}%
+      {\@ochoanh{#2}}}}}}
+% \@anh{có khung? true/false}{độ rộng}{tệp}
+\newcommand{\@anh}[3]{%
+  \ifstrequal{#1}{true}%
+    {\begin{tcolorbox}[khunganh, width=#2]\@timanh{\linewidth}{#3}\end{tcolorbox}}%
+    {\@timanh{#2}{#3}}}
+% \chenhinh[độ rộng]{tệp trong figures/}{Chú thích}{fig:nhan}   -> có khung
+% \chenhinh*[...]{...}{...}{...}                                  -> không khung
+\NewDocumentCommand{\chenhinh}{s O{0.75\linewidth} m m m}{%
+  \begin{figure}[H]\centering
+    \IfBooleanTF{#1}{\@anh{false}{#2}{#3}}{\@anh{true}{#2}{#3}}%
+    \caption{#4}\label{#5}\end{figure}}
+% Hai hình cạnh nhau (có khung):
+% \haihinh{tệp1}{chú thích 1}{nhãn1}{tệp2}{chú thích 2}{nhãn2}{chú thích chung}{nhãn chung}
+\newcommand{\haihinh}[8]{%
+  \begin{figure}[H]\centering
+    \begin{subfigure}[t]{0.48\linewidth}\centering\@anh{true}{\linewidth}{#1}\caption{#2}\label{#3}\end{subfigure}\hfill
+    \begin{subfigure}[t]{0.48\linewidth}\centering\@anh{true}{\linewidth}{#4}\caption{#5}\label{#6}\end{subfigure}
+    \caption{#7}\label{#8}
+  \end{figure}}
+
+% ==============================================================================
+% 6. MÃ NGUỒN
+% ==============================================================================
+% Badge ngôn ngữ (góc trên phải khung mã)
+\NewDocumentCommand{\@badgema}{O{bkxanhsang} m}{%
+  \tcbox[on line, colback=#1, colframe=#1, colupper=white, boxrule=0pt, arc=3pt,
+         boxsep=0pt, left=5pt, right=5pt, top=2pt, bottom=2pt,
+         fontupper=\scriptsize\bfseries\sffamily]{#2}}
+% Biểu tượng tệp
+\newcommand{\@icontep}{%
+  \tikz[baseline=-0.25ex]{\draw[bkxam, line width=0.7pt, line join=round]
+    (0,-0.11) -- (0,0.17) -- (0.13,0.17) -- (0.2,0.10) -- (0.2,-0.11) -- cycle;}}
+
+% 6.1 Khung mã:  \begin{khungma}{tên_tệp.py}{Python}[tùy chọn listings]
+%     #1 tên tệp (góc trái)  #2 ngôn ngữ (badge góc phải, cũng là language của listings)
+\NewTCBListing{khungma}{m m !O{}}{enhanced, breakable, listing only,
+  colback=manen, colframe=bkxam!40, boxrule=0.6pt, arc=2mm,
+  left=4pt, right=6pt, top=3pt, bottom=3pt, before skip=8pt, after skip=8pt,
+  colbacktitle=bkxam!10, coltitle=bkxanhdam, titlerule=0.5pt, toptitle=2pt, bottomtitle=2pt,
+  title={\@icontep\hspace{5pt}\ttfamily\small\bfseries\detokenize{#1}\hfill\@badgema{#2}},
+  listing options={style=mauma, frame=none, xleftmargin=18pt, numbersep=9pt,
+                   aboveskip=3pt, belowskip=1pt, language={#2}, #3}}
+
+% 6.2 Khung lệnh bash (kiểu cửa sổ terminal):  \begin{khungbash}[Tiêu đề] ... \end{khungbash}
+\definecolor{termnen}{HTML}{1E2230}
+\definecolor{termthanh}{HTML}{2D3346}
+\definecolor{termchu}{HTML}{E6E9F0}
+\definecolor{termxanh}{HTML}{7EE787}
+\definecolor{termcyan}{HTML}{79C0FF}
+\definecolor{termvang}{HTML}{F2CC60}
+\lstdefinestyle{terminal}{language=bash, backgroundcolor={},
+  basicstyle=\ttfamily\small\color{termchu}, keywordstyle=\color{termcyan}\bfseries,
+  commentstyle=\color{termchu!55!termnen}\itshape, stringstyle=\color{termvang},
+  numbers=none, frame=none, xleftmargin=0pt, columns=fullflexible,
+  literate={\$}{{\textcolor{termxanh}{\$}}}1}
+\newcommand{\@chamterm}{%
+  \tikz[baseline=-0.6ex]{\fill[do!80!white] (0,0) circle (3.3pt);
+    \fill[vang] (0.34,0) circle (3.3pt); \fill[xanhla!70!white] (0.68,0) circle (3.3pt);}}
+\NewTCBListing{khungbash}{!O{Terminal}}{enhanced, breakable, listing only,
+  colback=termnen, colframe=termthanh, boxrule=0.6pt, arc=2mm,
+  left=10pt, right=10pt, top=5pt, bottom=6pt, before skip=8pt, after skip=8pt,
+  colbacktitle=termthanh, coltitle=termchu!75, titlerule=0pt, toptitle=3pt, bottomtitle=3pt,
+  fonttitle=\ttfamily\footnotesize,
+  title={\@chamterm\hfill #1\hfill\@badgema[termxanh!55!black]{bash}},
+  listing options={style=mauma, style=terminal, aboveskip=3pt, belowskip=1pt}}
+
+% 6.3 Tự định nghĩa ngôn ngữ listings chưa có sẵn
+\lstdefinelanguage{JavaScript}{
+  morekeywords={break,case,catch,class,const,continue,default,do,else,export,extends,
+    false,finally,for,function,if,import,in,instanceof,let,new,null,return,super,
+    switch,this,throw,true,try,typeof,undefined,var,while,async,await,of},
+  sensitive=true, morecomment=[l]{//}, morecomment=[s]{/*}{*/},
+  morestring=[b]', morestring=[b]", morestring=[b]`}
+\lstdefinelanguage{JSON}{morestring=[b]", sensitive=true}
+
+% Ví dụ LaTeX: hiện mã (trên) và kết quả (dưới) — dùng trong Phụ lục B
+\NewTCBListing{vidulatex}{!o}{enhanced, breakable, listing and text,
+  colback=manen, colbacklower=white, colframe=bkxam!45, boxrule=0.5pt, arc=1.5mm,
+  segmentation style={bkxam!45, dashed}, left=8pt, right=8pt,
+  IfValueT={#1}{title={#1}, colbacktitle=bkxam!15, coltitle=bkxanh, fonttitle=\bfseries\small},
+  listing options={style=mauma, language={[LaTeX]TeX}, numbers=none, frame=none,
+    xleftmargin=0pt, basicstyle=\ttfamily\footnotesize, keywordstyle=\color{matukhoa}}}
+
+% ==============================================================================
+% 7. THAM CHIẾU NHANH
+% ==============================================================================
+\newcommand{\Hinh}[1]{\figurename~\ref{#1}}
+\newcommand{\Bang}[1]{\tablename~\ref{#1}}
+\newcommand{\PT}[1]{phương trình~\eqref{#1}}
+\newcommand{\Chuong}[1]{Chương~\ref{#1}}
+\newcommand{\Muc}[1]{mục~\ref{#1}}
+\newcommand{\PhuLuc}[1]{\appendixname~\ref{#1}}
+
+% ==============================================================================
+% 8. DANH MỤC TỪ VIẾT TẮT
+% ==============================================================================
+% \begin{danhmucviettat} \viettat{AI}{Trí tuệ nhân tạo} ... \end{danhmucviettat}
+\newenvironment{danhmucviettat}
+  {\rowcolors{2}{white}{bkxanhnen}%
+   \begin{longtable}{@{}L{3.2cm}L{\dimexpr\linewidth-3.2cm-2\tabcolsep\relax}@{}}}
+  {\end{longtable}}
+\newcommand{\viettat}[2]{\textbf{\textcolor{bkxanh}{#1}} & #2 \\}
+
+\makeatother

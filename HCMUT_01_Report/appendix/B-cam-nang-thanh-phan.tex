@@ -1,0 +1,181 @@
+% ==============================================================================
+% PHỤ LỤC B: CẨM NANG THÀNH PHẦN NHANH
+%  -> Tra cứu khi viết; XÓA \input của file này trong main.tex trước khi nộp.
+% ==============================================================================
+\chapter{Cẩm nang thành phần nhanh}
+\label{app:cam-nang}
+
+Phụ lục này liệt kê các lệnh tiện ích của mẫu (định nghĩa trong
+\texttt{config/commands.tex} và \texttt{config/colors.tex}). Mỗi khung gồm
+\textbf{mã} (phần trên) và \textbf{kết quả} (phần dưới). Các gói nền tảng: tcolorbox
+\cite{tcolorbox}; cú pháp LaTeX cơ bản xem \cite{lamport1994}.
+
+\section{Chế độ cá nhân / nhóm}
+
+Đổi một dòng ở đầu \texttt{main.tex}: \verb|\BaoCaoNhom| hoặc \verb|\BaoCaoCaNhan|.
+Bản cá nhân dùng thành viên \textbf{đầu tiên} trong \texttt{metadata.tex}, ẩn bảng phân
+công và đổi cách xưng hô.
+
+\begin{vidulatex}[Từ ngữ tự đổi theo chế độ]
+\ChungToi{} xin cam đoan... ; kết quả của \nhom{}.
+Tùy ý: \NhomCaNhan{(bản nhóm)}{(bản cá nhân)}
+\end{vidulatex}
+
+\section{Nhấn mạnh trong đoạn văn}
+
+\begin{vidulatex}
+\nhanmanh{Ý chính}, \quantrong{rất quan trọng},
+\danhdau{đánh dấu dạ quang}, \thuatngu{Học máy}[Machine Learning],
+\nhan{Mới} \nhan[do]{Ưu tiên} \nhan[xanhla]{Hoàn thành},
+\chuxanh{xanh} \chudo{đỏ} \chula{lá} \chucam{cam} \chutim{tím}.
+\canbosung{số liệu năm 2025}
+\end{vidulatex}
+
+\begin{vidulatex}[Danh sách có biểu tượng]
+\begin{dsdung} \item Đạt yêu cầu \end{dsdung}
+\begin{dssai}  \item Chưa đạt     \end{dssai}
+\begin{dssao}  \item Điểm nổi bật \end{dssao}
+\end{vidulatex}
+
+\section{Hộp thông báo và khung chữ}
+
+\begin{vidulatex}
+\begin{ghichu} Thông tin bổ sung. \end{ghichu}
+\begin{luuy}[Lưu ý khi đọc số liệu] Nội dung. \end{luuy}
+\begin{canhbao} Điều cần tránh. \end{canhbao}
+\begin{goiy} Mẹo hoặc gợi ý. \end{goiy}
+\end{vidulatex}
+
+\begin{vidulatex}
+\begin{ketqua} Kết quả/kết luận nổi bật. \end{ketqua}
+\begin{dinhnghia}[Tên] Định nghĩa đánh số theo chương. \end{dinhnghia}
+\begin{vidu} Ví dụ minh họa. \end{vidu}
+\end{vidulatex}
+
+\begin{vidulatex}[Khung tự chọn màu, khung nét đứt, trích dẫn]
+\begin{khungchu}[tim]{Khung màu tím có tiêu đề} Nội dung. \end{khungchu}
+\begin{khungchu}[ngoc] Khung không tiêu đề. \end{khungchu}
+\begin{khungnetdut} Đề bài / yêu cầu. \end{khungnetdut}
+\begin{trichdan}{Tác giả, năm} Câu trích dẫn. \end{trichdan}
+\end{vidulatex}
+
+\begin{vidulatex}[Ô chỉ số và so sánh hai cột]
+\begin{hangchiso}[3]
+  \ChiSo{95\%}{độ chính xác}
+  \ChiSo[cam]{3,2s}{thời gian}
+  \ChiSo[xanhla]{+12}{điểm}
+\end{hangchiso}
+\SoSanh{Ưu điểm}{Nhanh, rẻ.}{Nhược điểm}{Khó mở rộng.}
+\SoSanh[xanhduong][tim]{Phương án A}{...}{Phương án B}{...}
+\end{vidulatex}
+
+\section{Công thức}
+
+\begin{vidulatex}
+\begin{khungcongthuc}[Công thức quan trọng]
+  \begin{equation} \label{eq:vd}
+    f(x) = \int_0^x e^{-t^2} \dif t
+  \end{equation}
+\end{khungcongthuc}
+\begin{equation} \NoiBat{a^2 + b^2 = c^2} \end{equation}
+Tham chiếu: \PT{eq:vd}; ký hiệu $\R, \N, \abs{x}, \norm{v}$.
+\end{vidulatex}
+
+\section{Bảng biểu}
+
+\begin{vidulatex}[Bảng nhanh (bangbieu) — đổi thành bangsoc để có hàng sọc]
+\begin{bangbieu}{Chú thích bảng}{tab:vd}{C{1cm} Y C{2.5cm}}
+  \hangtieude \thead{STT} & \thead{Nội dung} & \thead{Giá trị} \\
+  \midrule
+  1 & Ô tốt  & \otot 9,5 \\
+  2 & Ô xấu  & \oxau 2,0 \\
+  3 & Ô nhấn & \onoibat 7,0 \\
+\end{bangbieu}
+\nguonbang{Tự tổng hợp.}
+\end{vidulatex}
+
+Kiểu cột có sẵn: \texttt{L\{rộng\}}, \texttt{C\{rộng\}}, \texttt{R\{rộng\}} (canh trái,
+giữa, phải với độ rộng cố định), \texttt{Y}/\texttt{Z} (cột giãn đầy dòng, canh trái/giữa).
+Bảng nhiều trang: xem \Bang{tab:bang-dai} ở \PhuLuc{app:du-lieu}.
+
+\section{Hình ảnh và tham chiếu}
+
+\begin{vidulatex}[Ảnh có khung; chưa có tệp -> hiện khung chờ]
+\chenhinh[0.55\linewidth]{so-do-mau}{Chú thích hình}{fig:vd}
+Tham chiếu: \Hinh{fig:vd}, \Bang{tab:vd}, \Chuong{chap:ket-qua},
+\Muc{sec:muc-tieu}, \PhuLuc{app:du-lieu}.
+\end{vidulatex}
+
+Ảnh không khung: \verb|\chenhinh*[rộng]{tệp}{chú thích}{nhãn}|. Hai hình cạnh nhau
+(tệp, chú thích, nhãn của từng hình rồi chú thích, nhãn chung):
+\begin{lstlisting}[language={[LaTeX]TeX}, numbers=none]
+\haihinh{a}{Chú thích a}{fig:a}{b}{Chú thích b}{fig:b}
+        {Chú thích chung}{fig:ab}
+\end{lstlisting}
+
+\section{Mã nguồn và lệnh bash}
+
+Khung mã: góc trái là \textbf{tên tệp}, góc phải là \textbf{badge ngôn ngữ}
+(cũng là ngôn ngữ tô màu của \texttt{listings}: Python, C, C++, Java, JavaScript,
+SQL, HTML, bash...). Tham số thứ ba (tùy chọn) là tùy chọn \texttt{listings}.
+\begin{lstlisting}[language={[LaTeX]TeX}, numbers=none]
+\begin{khungma}{main.cpp}{C++}
+...
+\end{khungma}
+\end{lstlisting}
+Kết quả:
+\begin{khungma}{main.cpp}{C++}
+#include <iostream>
+int main() {
+    std::cout << "Xin chào" << std::endl;   // in lời chào
+    return 0;
+}
+\end{khungma}
+
+\begin{khungma}{app.js}{JavaScript}[numbers=none]
+const tong = (a, b) => a + b;   // không đánh số dòng
+\end{khungma}
+
+Lệnh bash dùng khung terminal riêng (dấu \texttt{\$} được tô xanh như dấu nhắc lệnh):
+\begin{lstlisting}[language={[LaTeX]TeX}, numbers=none]
+\begin{khungbash}[Tiêu đề cửa sổ]
+...
+\end{khungbash}
+\end{lstlisting}
+\begin{khungbash}[Biên dịch báo cáo]
+$ cd HCMUT_02_Report_Class
+$ latexmk -xelatex -outdir=build main.tex   # biên dịch bằng XeLaTeX
+$ echo "Xong!"
+\end{khungbash}
+
+Đoạn mã có chú thích đánh số: dùng \texttt{lstlisting} với các tùy chọn
+\texttt{language} và \texttt{caption} (xem \PhuLuc{app:du-lieu}).
+
+\section{Lời giải}
+
+\begin{vidulatex}[Khung lời giải: nền trắng xám, chữ xanh dương]
+\begin{vidu} Tính $2 + 3 \times 4$. \end{vidu}
+\begin{loigiai}
+  Nhân trước, cộng sau: $2 + 3 \times 4 = 2 + 12 = 14$.
+\end{loigiai}
+\begin{loigiai}[Lời giải câu 2] Đổi tiêu đề bằng tham số tùy chọn. \end{loigiai}
+\end{vidulatex}
+
+\section{Bảng màu}
+
+Mỗi màu có ba sắc độ: \texttt{<tên>}, \texttt{<tên>dam}, \texttt{<tên>nhat}.
+
+\begin{center}
+\setlength{\tabcolsep}{3pt}
+\newcommand{\omau}[1]{\begin{tabular}{@{}c@{}}%
+  \tikz{\fill[#1] (0,0) rectangle (0.9,0.45);
+        \fill[#1dam] (0.9,0) rectangle (1.8,0.45);
+        \fill[#1nhat] (1.8,0) rectangle (2.7,0.45);
+        \draw[black!25] (0,0) rectangle (2.7,0.45);}\\[-2pt]
+  \footnotesize\texttt{#1}\end{tabular}}
+\omau{bkxanh}\omau{xanhduong}\omau{ngoc}\omau{xanhla}\omau{vang}\\[6pt]
+\omau{cam}\omau{do}\omau{hong}\omau{tim}\omau{nau}
+\end{center}
+Màu riêng của trường: \texttt{bkxanh}, \texttt{bkxanhsang}, \texttt{bkxanhnen},
+\texttt{bkvien}, \texttt{bkxam}. Thêm màu mới trong \texttt{config/colors.tex}:
+\\ \verb|\definecolor{ten}{HTML}{RRGGBB}  \TaoSacDo{ten}|.

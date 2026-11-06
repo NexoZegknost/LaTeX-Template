@@ -1,0 +1,20 @@
+% ==============================================================================
+% TIẾNG VIỆT TRONG LISTINGS (XeLaTeX/LuaLaTeX)
+%  listings mặc định chỉ xử lý ký tự 0-255; các chữ có dấu tiếng Việt (ế, ự, ỗ...)
+%  bị in lệch vị trí. File này khai báo chúng là "chữ cái" của listings.
+% ==============================================================================
+\makeatletter
+\def\lst@vietletter#1{%
+  \ifx#1\relax\else
+    \catcode`#1=\active
+    \lccode`\~=`#1\lccode`\/=`#1\lowercase{\def~{\lst@ProcessLetter/}}%
+    \expandafter\lst@vietletter
+  \fi}
+\lst@AddToHook{SelectCharTable}{%
+  \lst@vietletter
+  ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÝàáâãèéêìíòóôõùúýĂăĐđĨĩŨũ%
+  ƠơƯưẠạẢảẤấẦầẨẩẪẫẬậẮắẰằẲẳẴẵẶặẸẹẺẻẼẽẾếỀềỂể%
+  ỄễỆệỈỉỊịỌọỎỏỐốỒồỔổỖỗỘộỚớỜờỞởỠỡỢợỤụỦủỨứỪừ%
+  ỬửỮữỰựỲỳỴỵỶỷỸỹ%
+  \relax}
+\makeatother

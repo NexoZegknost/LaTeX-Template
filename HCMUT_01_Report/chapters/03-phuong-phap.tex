@@ -1,0 +1,60 @@
+% ==============================================================================
+% CHƯƠNG 3: DỮ LIỆU VÀ PHƯƠNG PHÁP
+% ==============================================================================
+\chapter{Dữ liệu và phương pháp}
+\label{chap:phuong-phap}
+
+\section{Nguồn dữ liệu}
+\label{sec:du-lieu}
+
+Mô tả nguồn, giai đoạn, quy mô và các trường thông tin của dữ liệu.
+
+\section{Quy trình thực hiện}
+\label{sec:quy-trinh}
+
+\Hinh{fig:quy-trinh} tóm tắt các bước thực hiện.
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[node distance=1.1cm,
+      buoc/.style={rectangle, rounded corners=2mm, draw=bkxanh, thick, fill=bkxanhnen,
+                   text width=2.7cm, minimum height=1.1cm, align=center, font=\small\bfseries},
+      mui/.style={-Latex, thick, bkxanhsang}]
+    \node[buoc] (a) {Thu thập\\dữ liệu};
+    \node[buoc, right=of a] (b) {Làm sạch \&\\chuẩn hóa};
+    \node[buoc, right=of b] (c) {Phân tích\\mô hình};
+    \node[buoc, below=0.9cm of c, fill=xanhlanhat, draw=xanhla] (d) {Đánh giá\\kết quả};
+    \draw[mui] (a) -- (b);
+    \draw[mui] (b) -- (c);
+    \draw[mui] (c) -- (d);
+    \draw[mui, dashed] (d) -| node[pos=0.25, below, font=\footnotesize\itshape]{điều chỉnh} (b);
+  \end{tikzpicture}
+  \caption{Quy trình thực hiện của báo cáo}
+  \label{fig:quy-trinh}
+\end{figure}
+
+\section{Công cụ}
+\label{sec:cong-cu}
+
+Đoạn mã dưới đây minh họa bước làm sạch dữ liệu (xem thêm \PhuLuc{app:du-lieu}).
+
+\begin{khungma}{lam_sach_du_lieu.py}{Python}
+import pandas as pd
+
+df = pd.read_csv("tin_tuyen_dung.csv")
+df = df.dropna(subset=["ma_nghe"])       # bỏ tin thiếu mã nghề
+df["nam"] = pd.to_datetime(df["ngay"]).dt.year
+print(df.groupby("nam").size())
+\end{khungma}
+
+Môi trường chạy được cài đặt bằng các lệnh sau:
+
+\begin{khungbash}[Cài đặt môi trường]
+$ python -m venv .venv
+$ source .venv/bin/activate
+$ pip install pandas matplotlib   # thư viện xử lý & vẽ biểu đồ
+\end{khungbash}
+
+\begin{goiy}[Mẹo trình bày]
+  Chỉ đưa vào chương này những đoạn mã ngắn, minh họa ý chính; mã đầy đủ để ở phụ lục.
+\end{goiy}

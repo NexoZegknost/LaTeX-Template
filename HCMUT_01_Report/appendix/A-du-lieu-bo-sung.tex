@@ -1,0 +1,40 @@
+% ==============================================================================
+% PHỤ LỤC A: DỮ LIỆU BỔ SUNG
+% ==============================================================================
+\chapter{Dữ liệu bổ sung}
+\label{app:du-lieu}
+
+Phụ lục chứa các bảng dài, số liệu chi tiết, mã nguồn đầy đủ hoặc biểu mẫu khảo sát.
+Bảng dài dưới đây tự ngắt sang trang mới và lặp lại hàng tiêu đề.
+
+\rowcolors{2}{white}{bkxanhnen}
+\begin{longtable}{C{1.2cm} L{5cm} C{3cm} C{3cm}}
+  \caption{Số liệu chi tiết theo năm (bảng dài nhiều trang)}\label{tab:bang-dai}\\
+  \toprule
+  \hangtieude \thead{Năm} & \thead{Chỉ tiêu} & \thead{Giá trị} & \thead{Ghi chú} \\
+  \midrule
+  \endfirsthead
+  \toprule
+  \hangtieude \thead{Năm} & \thead{Chỉ tiêu} & \thead{Giá trị} & \thead{Ghi chú} \\
+  \midrule
+  \endhead
+  \bottomrule
+  \endfoot
+  2010 & Số tin tuyển dụng AI & 20.600  & -- \\
+  2012 & Số tin tuyển dụng AI & 35.400  & -- \\
+  2014 & Số tin tuyển dụng AI & 58.900  & -- \\
+  2016 & Số tin tuyển dụng AI & 104.300 & -- \\
+  2018 & Số tin tuyển dụng AI & 180.900 & tăng 8,8 lần \\
+\end{longtable}
+\rowcolors{1}{}{}
+
+\section{Mã nguồn đầy đủ}
+
+\begin{lstlisting}[language=Python, caption={Thống kê số tin theo năm}]
+import pandas as pd
+
+def thong_ke(duong_dan: str) -> pd.Series:
+    """Đếm số tin tuyển dụng theo từng năm."""
+    df = pd.read_csv(duong_dan, parse_dates=["ngay"])
+    return df.groupby(df["ngay"].dt.year).size()
+\end{lstlisting}

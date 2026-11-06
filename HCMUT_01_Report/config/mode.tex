@@ -1,0 +1,76 @@
+% ==============================================================================
+% MODE: CHẾ ĐỘ CÁ NHÂN / NHÓM + DANH SÁCH THÀNH VIÊN
+% ------------------------------------------------------------------------------
+%  \BaoCaoNhom    -> bìa liệt kê toàn bộ thành viên, có Bảng phân công nhiệm vụ,
+%                    xưng "Chúng tôi / nhóm"
+%  \BaoCaoCaNhan  -> bìa chỉ ghi thành viên ĐẦU TIÊN, bỏ Bảng phân công,
+%                    xưng "Tôi"
+%  Ép chế độ từ dòng lệnh (không cần sửa file):
+%    latexmk -xelatex -usepretex="\def\CheDoEp{canhan}" main.tex
+% ==============================================================================
+\makeatletter
+\newif\ifnhom \nhomtrue
+
+\newcommand{\BaoCaoNhom}{\ifdefined\CheDoEp\else\global\nhomtrue\fi}
+\newcommand{\BaoCaoCaNhan}{\ifdefined\CheDoEp\else\global\nhomfalse\fi}
+
+\ifdefined\CheDoEp
+  \def\@cd@canhan{canhan}\edef\@cd@tmp{\CheDoEp}%
+  \ifx\@cd@tmp\@cd@canhan \global\nhomfalse \else \global\nhomtrue \fi
+\fi
+
+% ---------- Từ ngữ tự đổi theo chế độ ----------
+% \NhomCaNhan{chữ cho bản nhóm}{chữ cho bản cá nhân}
+\newcommand{\NhomCaNhan}[2]{\ifnhom#1\else#2\fi}
+\newcommand{\ChungToi}{\NhomCaNhan{Chúng tôi}{Tôi}}
+\newcommand{\chungtoi}{\NhomCaNhan{chúng tôi}{tôi}}
+\newcommand{\Nhom}{\NhomCaNhan{Nhóm}{Tôi}}          % đầu câu: "Nhóm xin..." / "Tôi xin..."
+\newcommand{\nhom}{\NhomCaNhan{nhóm}{tôi}}          % giữa câu
+\newcommand{\NguoiThucHien}{\NhomCaNhan{Nhóm thực hiện}{Sinh viên thực hiện}}
+
+% ---------- Khai báo thành viên ----------
+% \ThanhVien{Họ và tên}{MSSV}{Nhiệm vụ}{Mức đóng góp}
+\newcounter{sothanhvien}
+\newcommand{\ThanhVien}[4]{%
+  \stepcounter{sothanhvien}%
+  \expandafter\gdef\csname tv@ten@\arabic{sothanhvien}\endcsname{#1}%
+  \expandafter\gdef\csname tv@ms@\arabic{sothanhvien}\endcsname{#2}%
+  \expandafter\gdef\csname tv@nv@\arabic{sothanhvien}\endcsname{#3}%
+  \expandafter\gdef\csname tv@dg@\arabic{sothanhvien}\endcsname{#4}%
+}
+\newcommand{\TenTV}[1]{\csname tv@ten@#1\endcsname}
+\newcommand{\MSSVTV}[1]{\csname tv@ms@#1\endcsname}
+\newcommand{\NhiemVuTV}[1]{\csname tv@nv@#1\endcsname}
+\newcommand{\DongGopTV}[1]{\csname tv@dg@#1\endcsname}
+% "Họ tên - MSSV" (bỏ gạch nối nếu MSSV trống)
+\newcommand{\DongTV}[1]{\TenTV{#1}\ifcsempty{tv@ms@#1}{}{ -- \MSSVTV{#1}}}
+% Số thành viên được hiển thị
+\newcommand{\SoTV}{\ifnhom\value{sothanhvien}\else\@ne\fi}
+
+% ---------- Dựng sẵn các hàng bảng (dùng ở bìa và bảng phân công) ----------
+\newcommand{\NhanSinhVien}{\textbf{Sinh viên:}}
+% (dựng ngoài bảng để tránh lỗi điều kiện \if chứa dấu & trong tabular)
+\newcommand{\TaoHangBia}{%
+  \gdef\HangBia{\textbf{GVHD:} & \GVHD \\[3pt]}%
+  \ifdefempty{\GVPB}{}{\gappto\HangBia{\textbf{GVPB:} & \GVPB \\[3pt]}}%
+  \ifnhom \gappto\HangBia{\textbf{Nhóm:} & \TenNhom{} -- Lớp \MaLop \\[6pt]}%
+  \else   \gappto\HangBia{\textbf{Lớp:} & \MaLop \\[6pt]}\fi
+  \@tempcnta\z@
+  \loop\ifnum\@tempcnta<\SoTV\relax
+    \advance\@tempcnta\@ne
+    \xappto\HangBia{%
+      \ifnum\@tempcnta=\@ne \noexpand\NhanSinhVien\fi
+      & \noexpand\DongTV{\the\@tempcnta}\noexpand\\}%
+  \repeat
+}
+\newcommand{\TaoHangPhanCong}{%
+  \gdef\HangPhanCong{}%
+  \@tempcnta\z@
+  \loop\ifnum\@tempcnta<\value{sothanhvien}\relax
+    \advance\@tempcnta\@ne
+    \xappto\HangPhanCong{%
+      \the\@tempcnta & \noexpand\TenTV{\the\@tempcnta} & \noexpand\MSSVTV{\the\@tempcnta}
+      & \noexpand\NhiemVuTV{\the\@tempcnta} & \noexpand\DongGopTV{\the\@tempcnta}\noexpand\\}%
+  \repeat
+}
+\makeatother

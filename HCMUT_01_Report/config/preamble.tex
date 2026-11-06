@@ -1,0 +1,78 @@
+% ==============================================================================
+% PREAMBLE: GÓI LỆNH, PHÔNG CHỮ & TIẾNG VIỆT, KHỔ GIẤY
+% ==============================================================================
+\usepackage{iftex}
+\usepackage{etoolbox}
+
+% ---------- Phông chữ mặc định LaTeX (Latin Modern) + tiếng Việt ----------
+\ifPDFTeX
+  % pdfLaTeX (dự phòng, ví dụ Overleaf để mặc định): cần gói vntex
+  \usepackage[T5]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage[vietnamese]{babel}
+\else
+  % XeLaTeX / LuaLaTeX (khuyên dùng): fontspec mặc định dùng Latin Modern,
+  % có đủ ký tự tiếng Việt dựng sẵn (ẩ, ữ, ợ, Ỡ...) nên dấu không bị lệch.
+  \usepackage{fontspec}
+  \usepackage{polyglossia}
+  \setdefaultlanguage{vietnamese}
+\fi
+\usepackage{microtype}
+
+% ---------- Khổ giấy, lề, giãn dòng ----------
+\usepackage[a4paper, left=3cm, right=2cm, top=2.5cm, bottom=2.5cm,
+            headheight=24pt, headsep=14pt, footskip=28pt]{geometry}
+\usepackage{setspace}
+\setstretch{1.2}
+\usepackage{indentfirst}
+\setlength{\parindent}{1cm}
+\setlength{\parskip}{3pt}
+\raggedbottom
+
+% ---------- Toán học ----------
+\usepackage{amsmath, amssymb, mathtools}
+\numberwithin{equation}{chapter}
+
+% ---------- Hình ảnh, bảng biểu ----------
+\usepackage{graphicx}
+\graphicspath{{figures/}}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{pdflscape}
+\usepackage[table]{xcolor}
+\usepackage{array, tabularx, booktabs, multirow, makecell, longtable}
+\usepackage{pifont}
+
+% ---------- Đồ họa, hộp màu ----------
+\usepackage{tikz}
+\usetikzlibrary{calc, arrows.meta, positioning, shapes.geometric, backgrounds}
+\usepackage[most]{tcolorbox}
+
+% ---------- Danh sách, đầu/chân trang, tiêu đề, mục lục ----------
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage[explicit]{titlesec}
+\usepackage[titles]{tocloft}
+
+% ---------- Mã nguồn ----------
+\usepackage{listings}
+
+% ---------- Tài liệu tham khảo ----------
+\usepackage[numbers, sort&compress]{natbib}
+\usepackage{url}
+
+% ---------- Liên kết (nạp sau cùng) ----------
+\usepackage[unicode]{hyperref}
+\usepackage{bookmark}
+\hypersetup{
+  colorlinks = true,
+  linkcolor  = bkxanh,
+  citecolor  = bkxanh,
+  urlcolor   = bkxanhsang,
+  bookmarksnumbered = true,
+  pdftitle   = {\TieuDe},
+  pdfsubject = {\LoaiBaoCao{} - Môn \TenMon},
+}
+\AtBeginDocument{\hypersetup{pdfauthor={\NhomCaNhan{\TenNhom}{\TenTV{1}}}}}

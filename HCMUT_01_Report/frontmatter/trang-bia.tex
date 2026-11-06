@@ -1,0 +1,63 @@
+% ==============================================================================
+% TRANG BÌA  (thông tin lấy tự động từ config/metadata.tex)
+% ==============================================================================
+\hypersetup{pageanchor=false}
+% Lề đối xứng riêng cho trang bìa (khung TikZ cách mép trái/phải 1,5 cm, trên/dưới 2 cm)
+\newgeometry{left=2.6cm, right=2.6cm, top=3cm, bottom=3cm}
+\begin{titlepage}
+\TaoHangBia
+% ---------- Khung viền kiểu Bách Khoa ----------
+\begin{tikzpicture}[remember picture,overlay,inner sep=0,outer sep=0]
+	\draw[blue!70!black,line width=4pt] ([xshift=-1.5cm,yshift=-2cm]current page.north east) coordinate (A)--([xshift=1.5cm,yshift=-2cm]current page.north west) coordinate(B)--([xshift=1.5cm,yshift=2cm]current page.south west) coordinate (C)--([xshift=-1.5cm,yshift=2cm]current page.south east) coordinate(D)--cycle;
+	
+	\draw ([yshift=0.5cm,xshift=-0.5cm]A)-- ([yshift=0.5cm,xshift=0.5cm]B)--
+	([yshift=-0.5cm,xshift=0.5cm]B) --([yshift=-0.5cm,xshift=-0.5cm]B)--([yshift=0.5cm,xshift=-0.5cm]C)--([yshift=0.5cm,xshift=0.5cm]C)--([yshift=-0.5cm,xshift=0.5cm]C)-- ([yshift=-0.5cm,xshift=-0.5cm]D)--([yshift=0.5cm,xshift=-0.5cm]D)--([yshift=0.5cm,xshift=0.5cm]D)--([yshift=-0.5cm,xshift=0.5cm]A)--([yshift=-0.5cm,xshift=-0.5cm]A)--([yshift=0.5cm,xshift=-0.5cm]A);
+	
+	
+	\draw ([yshift=-0.3cm,xshift=0.3cm]A)-- ([yshift=-0.3cm,xshift=-0.3cm]B)--
+	([yshift=0.3cm,xshift=-0.3cm]B) --([yshift=0.3cm,xshift=0.3cm]B)--([yshift=-0.3cm,xshift=0.3cm]C)--([yshift=-0.3cm,xshift=-0.3cm]C)--([yshift=0.3cm,xshift=-0.3cm]C)-- ([yshift=0.3cm,xshift=0.3cm]D)--([yshift=-0.3cm,xshift=0.3cm]D)--([yshift=-0.3cm,xshift=-0.3cm]D)--([yshift=0.3cm,xshift=-0.3cm]A)--([yshift=0.3cm,xshift=0.3cm]A)--([yshift=-0.3cm,xshift=0.3cm]A);
+	
+\end{tikzpicture}
+
+% ---------- Nội dung bìa: canh giữa giữa khung, giãn đều theo chiều dọc ----------
+\begin{center}
+  {\large\bfseries
+    \MakeUppercase{\DaiHoc}\\[4pt]
+    \MakeUppercase{\Truong}\\[4pt]
+    \MakeUppercase{\Khoa}\par}
+
+  \vspace*{\fill}
+  \IfFileExists{figures/hcmut.png}
+    {\includegraphics[height=4cm]{hcmut}}
+    {\rule{0pt}{4cm}}\par
+  \vspace*{\fill}
+
+  {\Large\bfseries\color{bkxanh}\MakeUppercase{\LoaiBaoCao}\par}
+  \vspace{6pt}
+  {\LARGE\bfseries Môn \TenMon\ifdefempty{\MaMon}{}{ (\MaMon)}\par}
+
+  \vspace{14pt}
+  \rule{0.85\linewidth}{0.6pt}\par
+  \vspace{10pt}
+  \begin{minipage}{0.85\linewidth}
+    \centering\setstretch{1.15}
+    {\Large\bfseries\itshape\color{bkxanh}``\TieuDe''\par}
+    \ifdefempty{\TieuDePhu}{}{%
+      \vspace{6pt}{\normalsize\itshape \TieuDePhu\par}}
+  \end{minipage}\par
+  \vspace{10pt}
+  \rule{0.85\linewidth}{0.6pt}\par
+
+  \vspace*{\fill}
+  % ---------- Khối GVHD / sinh viên: cả khối nằm giữa trang ----------
+  {\renewcommand{\arraystretch}{1.15}%
+   \begin{tabular}{@{}r@{\hspace{12pt}}l@{}}
+     \HangBia
+   \end{tabular}\par}
+  \vspace*{\fill}
+
+  {\bfseries\MakeUppercase{\DiaDiem}, \MakeUppercase{\ThoiGian}\par}
+\end{center}
+\end{titlepage}
+\restoregeometry
+\hypersetup{pageanchor=true}

@@ -1,0 +1,27 @@
+# File sinh ra khi biên dịch LaTeX
+build/
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.listing
+*.synctex.gz
+*.xdv
+*.tmp
+*.tgz
+
+# PDF xuất ra ở thư mục gốc của mỗi mẫu (PDF demo nằm trong examples/ thì được giữ)
+HCMUT_*/main.pdf
+HCMUT_*/BaoCao.pdf
+HCMUT_*/BaoCao_*.pdf
+
+# Hệ điều hành / trình soạn thảo
+.DS_Store
+Thumbs.db
+desktop.ini
