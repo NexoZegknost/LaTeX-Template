@@ -17,13 +17,13 @@ Thay `<user>` bằng tên tài khoản GitHub và `HCMUT_01_Report` bằng tên 
 **Cách 1 – chỉ lấy file, không kèm lịch sử git (cần Node.js):**
 
 ```bash
-npx degit <user>/latex-templates/HCMUT_01_Report BaoCao_MonXYZ
+npx degit NexoZegknost/latex-templates/HCMUT_01_Report BaoCao_MonXYZ
 ```
 
 **Cách 2 – dùng git, chỉ tải thư mục cần dùng:**
 
 ```bash
-git clone --filter=blob:none --no-checkout https://github.com/<user>/latex-templates.git
+git clone --filter=blob:none --no-checkout https://github.com/NexoZegknost/latex-templates.git
 cd latex-templates
 git sparse-checkout set HCMUT_01_Report
 git checkout main
@@ -32,7 +32,7 @@ git checkout main
 **Cách 3 – lấy một phiên bản cố định (theo tag):**
 
 ```bash
-npx degit <user>/latex-templates/HCMUT_01_Report#HCMUT_01_Report-v1.0 BaoCao_MonXYZ
+npx degit NexoZegknost/latex-templates/HCMUT_01_Report#HCMUT_01_Report-v1.0 BaoCao_MonXYZ
 ```
 
 Sau khi lấy về, mở `README.md` bên trong thư mục mẫu để xem cách tùy chỉnh và biên dịch.
